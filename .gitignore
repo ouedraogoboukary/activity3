@@ -1,5 +1,7 @@
 *.Rnw
-*.tex
 *.log
 *.synctex.gz
+*.png
+*.tex
+ !Activity3.tex
 
