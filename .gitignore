@@ -1,0 +1,5 @@
+*.Rnw
+*.tex
+*.log
+*.synctex.gz
+
