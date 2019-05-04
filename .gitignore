@@ -2,6 +2,6 @@
 *.log
 *.synctex.gz
 *.png
-*.tex
- !Activity3.tex
+*.zip
+Activity3-concordance.tex
 

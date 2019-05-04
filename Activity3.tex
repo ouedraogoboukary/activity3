@@ -1,0 +1,143 @@
+\documentclass[a4 paper, french,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[french]{babel}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{fit,positioning,shapes,snakes}
+\usetikzlibrary{arrows,positioning,calc}
+\definecolor{col1}{RGB}{255,249,203}
+\definecolor{col2}{RGB}{255,255,255}
+	\definecolor{macoul1}{rgb}{0.52, 0.52, 0.51}
+\definecolor{macoul2}{rgb}{0.43, 0.5, 0.5}
+\definecolor{bp}{rgb}{0.96, 0.76, 0.76}
+\definecolor{bs1}{rgb}{0.54, 0.81, 0.94}
+	\definecolor{bs2}{rgb}{0.63, 0.79, 0.95}
+% Define box and box title style
+\tikzstyle{mybox} = [draw=macoul1, fill=col2, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[fill=macoul1, text=black]
+
+\newcommand{\fancybox}[2][Title of the box]{%
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{1\textwidth}
+    #2
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {#1};
+\node[fancytitle, rounded corners] at (box.east) {};
+\end{tikzpicture}%
+}
+\usepackage{textcomp}
+\usepackage[official]{eurosym}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage[document]{ragged2e}
+\usepackage{setspace}
+\linespread{1.2}
+\definecolor{violet}{HTML}{560D7A}
+\geometry{top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm}
+\author{Boukary OUEDRAOGO}
+\date{\today}
+\title{\textcolor{violet}{\textbf{\LARGE Gérez votre code avec Git et GitHub Activité 3 }}}
+\usepackage{Sweave}
+\begin{document}
+
+\input{Activity3-concordance}
+
+\maketitle
+
+\begin{flushleft}\rule{1\linewidth}{0.4pt} \end{flushleft}
+\small{
+\section*{\textcolor{violet}{Consignes}}
+\justify
+L'objectif de l'activité est d'expliquer Git à une personne qui ne l'a jamais utilisée au travers des réponses aux questions suivantes:
+\begin{enumerate}
+  \item Qu'est-ce qu'un commit;
+  \item À quoi sert la commande git log;
+  \item Qu'est-ce qu'une branche.
+\end{enumerate}
+\justify
+Dans ce qui suit nous donnerons des éléments de réponses à ces questions afin de permettre à un débutant de comprendre le fonctionnement de Git
+}
+\begin{center}\rule{1\linewidth}{.4pt} \end{center}
+
+\subsection*{Question 1 : Qu'est-ce qu'un commit ?}
+\justify
+En informatique, qu'il s'agisse d'un projet personnel ou d'un projet multi-colaborateurs, il est nécessaire de bien garder les traces des différentes modifications apportées au projet. Cela s'appelle du versionning dans le langage du commun des informaticiens.  Pour réaliser ce versionning de code de manière claire et cohérente, Linus Torvald à crée un outil puissant appelé Git.\\
+Git permet de suivre les modifications de tous les fichiers indexés dans un projet.
+Indexer un fichier dans Git consiste à signaler à Git que l'on souhaite que le fichier en question fasse partir de ceux que l'on souhaite suivre les modifications. Cela se fait au travers de la commande \textcolor{violet}{git add \textit{nomDuFichier.extension}}.\\
+Après avoir modifié les fichiers du projet et les ajouté à l'index de Git, il faut valider les modifications et ajouter un message en guise de commentaire pour permettre de se retrouver plus facilement et de savoir précisement les modifications qui ont été faites. En d'autres termes il s'agit de sauvegarder la version courante du projet. Pour réaliser cela on utilise un commit.\\
+Un commit n'est rien d'autre qu'une sauvegarde d'une version d'un projet avec des commentaires indiquant les modifications qui ont été faites dans cette version.
+La commande git pour faire un commit est :\textcolor{violet}{git commit -m  "\textit{commentaire} " }.\\
+Pour illustrer mon propos je prends l'exemple mon cas lorsque je rédigais cette note.
+Quand j'ai fini de rédiger les réponses aux deux premières questions, j'ai ajouté le ficher à l'index de git en faissant:\\
+\textcolor{violet}{git add Activity3.pdf}\\
+Ensuite j'ai fait un commit pour expliquer un peu les modifications que j'ai apportées en faisant :\\
+\textcolor{violet}{git commit -m "Commit 2 blackaction question 1 et 2"}\\
+En faisant cela j'ai crée une version de mon projet.
+\subsection*{Question 2: À quoi sert la commande git log ?}
+ \justify  Lorsqu'on réalise plusieurs commits dans un projet, il arrive que l'on veuille voir l'historique des modifications qui ont été faites, en d'autres termes, des différentes versions du projet. Cela est nécessaire surtout quand il s'agit d'un projet multicolaborateurs où l'on veut savoir qui a fait telle ou telle modification. C'est dans cette situation qu'intervient la commande git log.\\
+ La commande git log permet d'afficher l'historique des commits, de savoir précisement qui a fait tel ou tel commit et les messages précisant les modifications. 
+ En effet la commade git log affiche tous les commits, avec pour chacun d'eux son identifiant unique appelé SHA, le nom de l'auteur du commit et son adresse e-mail, la date du commit ainsi que le commentaire que l'auteur a choisi pour son commit.\\
+ La syntaxe de la commande Git log est tout simplement: \textcolor{violet}{git log}.\\
+ En guise d'illustration voici le résultat du git log que j'ai effectué après le précédent commit.
+ \begin{center}
+ \includegraphics[width=1\textwidth,height= 5cm]{log.PNG}
+
+ \end{center}
+
+\subsection*{Question 3: Qu'est-ce qu'une branche ?}
+\justify
+La notion de branche est fondamentale lorsque que l'on travaille avec git. A partir de la branche principale qui est par défaut master et qui contient les premiers commits, on peut créer d'autres branches qui contiendront d'autres commits. Cette façon de procéder est souvent nécessaire lorsque l'on souhaite faire des tests sans pour autant les appliqués à la branche principale. Illustrons cela par un schéma explicatif\\
+\justify
+\fancybox[Schéma explicatif du fonctionnement des branches dans Git ]{
+\begin{tikzpicture}[auto,node distance=2cm, align=center,
+block/.style={rectangle,draw, thick,inner sep=2pt,minimum size=5mm},
+paths/.style={->, very thick, >=stealth'},
+curver/.style={->, thick, >=stealth', bend right=270, looseness=2, distance = 30mm},
+curvel/.style={->, thick, >=stealth', bend left=270, looseness=2, distance = 30mm},
+]
+%% Draw nodes
+\node[fill=bp,text=black,scale=0.5] (brp) at (0,0) {\small Branche principale\\\small\textbf{\textcolor{red}{(master)}}};
+\node[circle,draw,text=black,scale=0.4] (com1) at (2,0) {Commit 1\\\textcolor{red}{(master)}};
+\node[draw,text=black,circle, scale=0.4] (com2) at (4.,0) { commit 2\\\textcolor{red}{(master)}};
+\node[draw,text=black,circle,scale=0.4] (com3) at (6,0) {commit 3\\\textcolor{red}{(master)}};
+\node[draw,text=black,circle,scale=0.4] (com4) at (8,0) {Commit 4\\\textcolor{red}{(master)}};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Branche secondaire 1
+\node[fill=bs1,text=black,scale=0.5] (brs1) at (6.5,2) {\small Branche secondaire 1\\\small\textbf{\textcolor{black}{(monTest1)}}};
+\node[circle,draw,text=black,scale=0.4] (com1brs1) at (9,2) {Commit 3\\\textcolor{black}{(monTest1)}};
+\node[circle,draw,text=black,scale=0.4] (com2brs1) at (11,2) {Commit 4\\\textcolor{black}{(monTest1)}};
+\node[circle,draw,text=black,scale=0.4] (com3brs1) at (13,2) {Commit 5\\\textcolor{black}{(monTest1)}};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Branche secondaire 2
+\node[fill=bs2,text=black,scale=0.5] (brs2) at (10.5,-2) {\small Branche secondaire 1\\\small\textbf{\textcolor{black}{(monTest2)}}};
+\node[circle,draw,text=black,scale=0.4] (com1brs2) at (13.,-2) {Commit 5\\\textcolor{black}{(monTest2)}};
+\node[circle,draw,text=black,scale=0.4] (com2brs2) at (15.,-2) {Commit 6\\\textcolor{black}{(monTest2)}};
+%###############################################################################################################
+%%%%%% DRAW PATHS
+\draw[paths,draw=macoul2] (brp) to node[midway,sloped,above] {} (com1);
+\draw[paths,draw=macoul2] (com1) to node [swap,midway] {} (com2);
+\draw [paths, draw=macoul2](com2) to node [swap,midway] {} (com3);
+\draw [paths,draw=macoul2] (com3) to node [swap,midway] {} (com4);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[paths,draw=macoul2] (com2) to node [swap,midway] {} (brs1);
+\draw[paths,draw=macoul2] (brs1) to node [swap,midway] {} (com1brs1);
+\draw[paths,draw=macoul2] (com1brs1) to node [swap,midway] {} (com2brs1);
+\draw[paths,draw=macoul2] (com2brs1) to node [swap,midway] {} (com3brs1);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[paths,draw=macoul2] (com4) to node [swap,midway] {} (brs2);
+\draw[paths,draw=macoul2] (brs2) to node [swap,midway] {} (com1brs2);
+\draw[paths,draw=macoul2] (com1brs2) to node [swap,midway] {} (com2brs2);
+\draw[paths,draw=bp] (com2brs2) to node [swap,midway] {} (com4);
+\draw[paths,draw=bp] (com3brs1) to node [swap,midway] {} (com4);
+\end{tikzpicture}
+}
+\justify
+Comme le montre la figure, à partir du deuxième commit sur la branche principale on a crée une première branche secondaire. Le but est de faire des tests sur cette branche sans altérer la branche principale. Une fois que nous sommes sûr de ce que nous avons fait sur cette branche secondaire, nous pouvons ajouter les commits qui y sont réalisés sur la branche principale. Cela ce fait au moyen de la commande git merge.
+Pour créer une nouvelle branche, il faut d'abord se positionner sur la branche à partir de laquelle la nouvelle branche doit être créée à l'aide de la commande suivante: \textcolor{violet}{git checkout \textit{nomDeLaBranche}}.\\
+Pour afficher les différentes branches du projet on utilise la command:\textcolor{violet}{git branch}. La branche active c'est-à-dire celle sur laquelle nous sommes en train de réaliser les commits sera affichée en vert\\
+Si je veux ajouter les commits de ma branche monTest1 à la branche principale master, je me positionne sur la branche master en faisant \textcolor{violet}{git checkout \textit{master}} ensuite je fais \textcolor{violet}{git merge \textit{monTest1}}\\
+\end{document}
